@@ -2,7 +2,7 @@
 <c3p0-config>
 	<default-config>
 		<property name="driverClass">com.mysql.jdbc.Driver</property>
-		<property name="jdbcUrl">jdbc:mysql://127.0.0.1:3306/javaweb</property>
+		<property name="jdbcUrl">jdbc:mysql://127.0.0.1:3306/xxm</property>
 		<property name="user">root</property>
 		<property name="password">123456</property>
 	</default-config>
