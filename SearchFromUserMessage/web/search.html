@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <style type="text/css">
+        .content{
+            width:643px;
+            margin:50px auto;
+            text-align: center;
+        }
+        input[type='text']{
+            width:530px;
+            height:40px;
+            font-size: 14px;
+        }
+        input[type='button']{
+            width:100px;
+            height:46px;
+            background: #38f;
+            border: 0;
+            color: #fff;
+            font-size: 15px
+        }
+        .result{
+            /*position: absolute;*/
+            width: 535px;
+            border: 1px solid #999;
+            border-top: 0;
+            display: none;
+        }
+        .result div:hover{
+            background-color: #ccc;
+            cursor: pointer;
+        }
+        body{
+            background-image: url("img/3.jpg");
+        }
+    </style>
+</head>
+<body>
+<div class="content">
+    <img alt="" src="img/future.png"><br/><br/>
+    <input type="text" name="word" id="searchWord">
+    <input type="button" value="搜索一下">
+    <div class="result">
+		<div>张三</div>
+		<div>张三丰</div>
+	</div>
+</div>
+<script type="text/javascript" src="./js/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+    $("#searchWord").keyup(function () {
+        if (this.value===""){
+            $(".result").empty().hide();
+            return;
+        }
+        var name="name="+this.value;
+        $.post("search",name,function (result) {
+            $(".result").empty();
+            if (result===null||result.length===0){
+                $(".result").hide();
+                return;
+            }
+            for (var user of result){
+                $("<div>"+user.name+"</div>").appendTo(".result");
+            }
+            $(".result").show();
+        },"json");
+        $(".result").on("click","div",function () {
+            $("#searchWord").val(this.innerHTML);
+            $(".result").empty().hide();
+        })
+    });
+</script>
+</body>
+</html>

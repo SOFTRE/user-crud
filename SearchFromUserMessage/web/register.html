@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:margin-left="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+    <style>
+        body {
+            background-image: url("img/1.jpg");
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <font size="6" color="#ff7f50">会员注册</font><font size="6" color="#ff7f50"> USER REGISTER</font><br>
+    <form class="form-horizontal" style="margin-top: 5px;">
+        <table style="margin-left: 100px;margin-top: 30px">
+            <tr>
+                <td width="70"><font face="华文新魂" size="3" color="#556b2f">用户名:</font></td>
+                <td>
+                    <input type="text" id="username" name="username" placeholder="请输入用户名">
+                    <span id="usernameInfo"></span>
+                </td>
+            </tr>
+            <tr>
+                <td><font color="#556b2f">密码:</font></td>
+                <td>
+                    <input type="password" placeholder="请输入密码">
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="注册" style="margin-left: 100px;margin-top: 30px;width: 60px;height: 30px"/>
+    </form>
+</div>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script>
+    $("#username").change(function () {
+        var params = "name=" + $("#username").val();
+        $.post("./isExist", params, function (result) {
+            if (result === "true") {
+                $("#usernameInfo").html("用户名已经存在").css("color", "red");
+            } else {
+                $("#usernameInfo").html("用户名可用").css("color", "green");
+            }
+        }, "text");
+    });
+</script>
+</body>
+</html>
